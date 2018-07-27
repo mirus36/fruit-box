@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Cupboard from './Cupboard.js'
+import Cupboard from './containers/Cupboard'
 
 class App extends Component {
   render() {
@@ -11,9 +11,5 @@ class App extends Component {
     );
   }
 }
-
-
-
-
 
 export default App;
