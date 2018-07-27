@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import Box from './Box.js';
+import React, { PureComponent } from 'react';
+import Box from './Box';
 import { Droppable } from 'react-beautiful-dnd';
+import { connect } from 'react-redux'
 
-class Space extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            spaceId: props.spaceId
-        };
-    }
-
-
+class Space extends PureComponent {
     render() {
+        console.log(this.props);
         return (
-            <Droppable droppableId={this.state.spaceId} type="SPACE" isDropDisabled= {true}>
+            <Droppable droppableId={this.props.spaceId} type="SPACE" isDropDisabled={this.props.box !== null}>
                 {(provided, snapshot) => (
                     <div className="Space" ref={provided.innerRef} {...provided.droppableProps}>
-                        <Box boxId={this.state.spaceId}/>
+                        {this.props.box !== null
+                            ? (<Box boxId={this.props.spaceId} entry={this.props.box} />)
+                            : null
+                        }
                         {provided.placeholder}
                     </div>
                 )}
@@ -26,4 +22,9 @@ class Space extends Component {
     }
 }
 
-export default Space;
+export default connect(
+    (state, ownProps) => ({
+        ...ownProps,
+        box: state.cupboard.get(Number(ownProps.spaceId))
+    })
+)(Space);
