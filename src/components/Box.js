@@ -8,8 +8,9 @@ class Box extends Component {
         return (
             <Draggable draggableId={`BOX_${this.props.boxId}`} index={0}>
                 {(provided, snapshot) => {
+                    const width = `${50 * this.props.box.sizze}px`;
                     const style = {
-                        width: `${50 * this.props.box.sizze}px`,
+                        width,
                         ...provided.draggableProps.style,
                     };
                     return (
@@ -17,7 +18,7 @@ class Box extends Component {
                             <Droppable droppableId={`BOX_SPACE_${this.props.boxId}`} type="BOX_SPACE" direction="horizontal" >
                                 {(provided, snapshot) => (
                                     <div ref={provided.innerRef} {...provided.droppableProps} >
-                                        <div className="BoxSpace">
+                                        <div className="BoxSpace" width = {width}>
                                             {this.props.box.items.map((fruit, index) =>
                                                 <Fruit key={index} boxId={this.props.boxId} fruitId={index} />
                                             )}

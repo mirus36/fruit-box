@@ -7,3 +7,14 @@ export function createReplaceBox(from, to) {
         to
     }
 }
+
+export const REPLACE_FRUIT = "REPLACE_FRUIT";
+export function createReplaceFruit(fromBox, toBox, from, to) {
+    return {
+        type: REPLACE_FRUIT,
+        fromBox,
+        toBox,
+        from,
+        to
+    }
+}

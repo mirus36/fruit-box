@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Space from '../components/Space';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
-import { createReplaceBox } from '../actions';
+import { createReplaceBox, createReplaceFruit } from '../actions';
 
 
 class Cupboard extends Component {
@@ -12,6 +12,11 @@ class Cupboard extends Component {
             const from = Number(result.source.droppableId.replace("CUPBOARD_SPACE_",''));
             const to = Number(result.destination.droppableId.replace("CUPBOARD_SPACE_",''));
             this.props.replaceBox(from, to)
+        }
+        if (result.type === "BOX_SPACE" && result.destination !== null) {
+            const fromBox = Number(result.source.droppableId.replace("BOX_SPACE_",''));
+            const toBox = Number(result.destination.droppableId.replace("BOX_SPACE_",''));
+            this.props.replaceFruit(fromBox, toBox, result.source.index, result.destination.index);
         }
     }
 
@@ -38,6 +43,7 @@ class Cupboard extends Component {
 export default connect(
     state => state,
     (dispatch) => ({
-        replaceBox: (from, to) => dispatch(createReplaceBox(from, to))
+        replaceBox: (from, to) => dispatch(createReplaceBox(from, to)),
+        replaceFruit: (fromBox, toBox, from, to) => dispatch(createReplaceFruit(fromBox, toBox, from, to))
     })
 )(Cupboard);
