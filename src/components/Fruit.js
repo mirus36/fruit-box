@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 class Fruit extends Component {
     render() {
         return (
-            <Draggable draggableId={this.props.boxId} index={this.props.fruitId}>
+            <Draggable draggableId={`FRUIT_${this.props.boxId}_${this.props.fruitId}`} index={this.props.fruitId}>
                 {(provided, snapshot) => {
                     const style = {
                         width: `${this.props.size * 25}px`,
                         height: `${this.props.size * 25}px`
                     };
                     return (
-                        <div className={this.props.type} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={style}>
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                            <div className={this.props.type}  style={style}></div>
                         </div>
                     )
                 }}

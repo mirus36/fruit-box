@@ -9,7 +9,9 @@ class Cupboard extends Component {
 
     onDragEnd = (result) => {
         if (result.type === "CUPBOARD_SPACE" && result.destination !== null) {
-            this.props.replaceBox(Number(result.source.droppableId), Number(result.destination.droppableId))
+            const from = Number(result.source.droppableId.replace("CUPBOARD_SPACE_",''));
+            const to = Number(result.destination.droppableId.replace("CUPBOARD_SPACE_",''));
+            this.props.replaceBox(from, to)
         }
     }
 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class Space extends Component {
     render() {
         return (
-            <Droppable droppableId={`${this.props.spaceId}`} type="CUPBOARD_SPACE" isDropDisabled={this.props.box !== null}>
+            <Droppable droppableId={`CUPBOARD_SPACE_${this.props.spaceId}`} type="CUPBOARD_SPACE" isDropDisabled={this.props.box !== null}>
                 {(provided, snapshot) => (
                     <div className="Space" ref={provided.innerRef} {...provided.droppableProps} >
                         {this.props.box !== null
